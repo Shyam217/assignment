@@ -1,0 +1,70 @@
+mobile_dict = {}
+mobile_count = 0
+
+class Mobile:
+    def __init__(self, brand, model, ram, price):
+        self.brand = brand
+        self.model = model
+        self.ram = ram
+        self.price = price
+
+    def mobile_object(self):
+        each_object = {"Brand": self.brand,
+                        "Model": self.model,
+                        "Ram": self.ram,
+                        "Price": self.price}
+        return each_object
+    
+def mobile_count(brand):
+    if brand not in mobile_dict:
+        mobile_count = 0
+        mobile_count += 1
+        mobile_dict[brand] = mobile_count
+    else:
+        mobile_dict[brand] = mobile_dict[brand] +1
+    return mobile_dict
+
+def mobile_count_updation(brand):
+    if brand not in mobile_dict:
+        pass
+    else:
+        mobile_dict[brand] = mobile_dict[brand] - 1
+    return mobile_dict
+
+
+total_stock = []
+total_stock_count = 0
+while True:
+    item = input("1 for Adding mobile\n2 for deleting mobile\n3 for view stock")
+    print()
+    if item == "1":
+        brand = input("Enter brand name: ")
+        model = input("enter model name: ")
+        ram = input("Enter ram size: ")
+        price = input("Enter price: ")
+        obj = Mobile(brand, model, ram, price)
+        mobile = obj.mobile_object()
+        mobile_brands = mobile_count(brand)
+        
+        total_stock += [mobile]
+        total_stock_count = len(total_stock)
+
+        print(total_stock)
+    elif item =="2":
+        brand = input("Enter brand name: ")
+        model = input("Enter model: ")
+        for i in total_stock:
+            if brand in i["Brand"] and model in i["Model"]:
+                index = total_stock.index(i)
+                total_stock.pop(index)
+                total_stock_count = len(total_stock)
+                mobile_brands = mobile_count_updation(brand)
+            else:
+                continue
+    elif item == "3":
+        print("total_stock_count: ", total_stock_count)
+        print(mobile_brands)
+        print(total_stock)
+        print()
+    else:
+        print("Pleas enter valid input")
